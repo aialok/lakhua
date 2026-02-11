@@ -1,0 +1,52 @@
+# OSM data (large files)
+*.osm.pbf
+*.osm
+data/*.osm.pbf
+data/*.osm
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+venv/
+env/
+.pytest_cache/
+
+# JavaScript
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+.npm/
+
+# Go
+*.exe
+*.test
+*.out
+go.work
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build artifacts
+*.log
+.cache/
+
+# Keep packaged databases
+!libs/python/lakhua/data/india.db
+!libs/javascript/data/india.db
+!libs/go/data/india.db
