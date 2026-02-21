@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+recursive-include lakhua/data *.json
+include lakhua/py.typed
+

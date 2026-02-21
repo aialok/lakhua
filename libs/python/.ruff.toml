@@ -1,0 +1,13 @@
+line-length = 100
+
+[lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "PIE", "PT", "RET", "SIM"]
+ignore = []
+
+[lint.isort]
+known-first-party = ["lakhua"]
+
+[format]
+indent-style = "space"
+quote-style = "double"
+
