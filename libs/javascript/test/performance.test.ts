@@ -7,9 +7,9 @@ const geocoder = ReverseGeocoder.getInstance();
 const dataLoader = ReverseGeoDataLoader.getInstance();
 
 test("handles repeated lookups efficiently", () => {
-  const h3 = latLngToCell(22.5726, 88.3639, 6);
+  const h3 = latLngToCell(22.5726, 88.3639, 5);
   dataLoader.setStoresForTesting({
-    6: {
+    5: {
       [h3]: {
         city: "Kolkata",
         state: "West Bengal",

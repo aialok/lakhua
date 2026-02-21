@@ -24,7 +24,7 @@ npm-debug.log*
 yarn-error.log*
 package-lock.json
 .npm/
-
+/libs/javascript/*.tgz
 # Go
 *.exe
 *.test

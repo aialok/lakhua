@@ -11,10 +11,10 @@ beforeEach(() => {
 });
 
 test("returns exact match for geocodeH3", () => {
-  const h3 = latLngToCell(28.6139, 77.209, 6);
+  const h3 = latLngToCell(28.6139, 77.209, 5);
 
   dataLoader.setStoresForTesting({
-    6: {
+    5: {
       [h3]: {
         city: "New Delhi",
         state: "Delhi",
@@ -27,13 +27,12 @@ test("returns exact match for geocodeH3", () => {
   expect(result?.city).toBe("New Delhi");
   expect(result?.state).toBe("Delhi");
   expect(result?.matched_h3).toBe(h3);
-  expect(result?.matched_resolution).toBe(6);
+  expect(result?.matched_resolution).toBe(5);
 });
 
 test("falls back to parent resolution when exact match is missing", () => {
-  const h3Res6 = latLngToCell(28.6139, 77.209, 6);
-  const h3Res5 = cellToParent(h3Res6, 5);
-  const h3Res4 = cellToParent(h3Res6, 4);
+  const h3Res5 = latLngToCell(28.6139, 77.209, 5);
+  const h3Res4 = cellToParent(h3Res5, 4);
 
   dataLoader.setStoresForTesting({
     5: {
@@ -50,7 +49,7 @@ test("falls back to parent resolution when exact match is missing", () => {
     },
   });
 
-  const result = geocoder.geocodeH3(h3Res6);
+  const result = geocoder.geocodeH3(h3Res5);
   expect(result).not.toBeNull();
   expect(result?.city).toBe("Delhi");
   expect(result?.matched_h3).toBe(h3Res5);
@@ -59,20 +58,19 @@ test("falls back to parent resolution when exact match is missing", () => {
 
 test("returns null when not found", () => {
   dataLoader.setStoresForTesting({
-    6: {},
     5: {},
     4: {},
   });
 
-  const h3 = latLngToCell(19.076, 72.8777, 6);
+  const h3 = latLngToCell(19.076, 72.8777, 5);
   const result = geocoder.geocodeH3(h3);
   expect(result).toBeNull();
 });
 
 test("geocode() converts coordinates and resolves", () => {
-  const h3 = latLngToCell(12.9716, 77.5946, 6);
+  const h3 = latLngToCell(12.9716, 77.5946, 5);
   dataLoader.setStoresForTesting({
-    6: {
+    5: {
       [h3]: {
         city: "Bengaluru",
         state: "Karnataka",
@@ -83,5 +81,5 @@ test("geocode() converts coordinates and resolves", () => {
   const result = geocoder.geocode(12.9716, 77.5946);
   expect(result).not.toBeNull();
   expect(result?.city).toBe("Bengaluru");
-  expect(result?.matched_resolution).toBe(6);
+  expect(result?.matched_resolution).toBe(5);
 });
