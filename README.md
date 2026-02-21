@@ -16,6 +16,9 @@ Best for backend services, batch pipelines, and privacy-sensitive workloads that
 
 ---
 
+<img width="1916" height="541" alt="image" src="https://github.com/user-attachments/assets/f1fe6359-1730-4d06-abad-85f9f4283f7a" />
+
+
 ## What It Does
 
 - 📍 converts `lat, lon` to India location metadata (`city`, `state`, optional `district`, `pincode`)
