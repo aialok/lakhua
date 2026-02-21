@@ -1,6 +1,10 @@
 # lakhua
 
-Sub-millisecond reverse geocoding for India. Runs entirely in-memory — zero API calls, zero network, zero latency overhead.
+Sub-millisecond reverse geocoding for India, fully offline.
+
+No API calls. No network latency. No rate limits.
+
+Best for backend services, batch pipelines, and privacy-sensitive workloads that need deterministic lookup performance.
 
 `lakhua` is named after my hometown — a small town barely on most maps.
 
@@ -27,6 +31,16 @@ Sub-millisecond reverse geocoding for India. Runs entirely in-memory — zero AP
 - online API or hosted endpoint
 - guaranteed full spatial coverage for every coordinate in India
 
+## Why Not Hosted Reverse-Geocoding APIs?
+
+| Feature | lakhua | Hosted API |
+|---|---|---|
+| Works offline | yes | no |
+| API key required | no | usually yes |
+| Network dependency | no | yes |
+| Per-request cost | no | usually yes |
+| Latency variability | low, in-process | network-dependent |
+
 ## How It Works
 
 lakhua uses [Uber's H3](https://h3geo.org/) hexagonal grid to index India's geographic data.
@@ -36,6 +50,18 @@ lakhua uses [Uber's H3](https://h3geo.org/) hexagonal grid to index India's geog
 3. It looks up that cell in the in-memory map.
 4. If no match is found and fallback is enabled, it walks up to the parent cell at resolution 4.
 5. Returns `null`/`None` if no match exists.
+
+```text
+lat, lon
+   ->
+H3 index (res 5)
+   ->
+in-memory lookup
+   ->
+fallback to parent (res 4, optional)
+   ->
+result / null
+```
 
 ## SDKs
 
@@ -116,6 +142,28 @@ All SDKs accept the same options:
 The dataset covers major Indian cities and districts using H3 resolutions 4 and 5.  
 Coverage is not exhaustive — rural or remote areas may return `null`.
 
+## Runtime Compatibility
+
+- JavaScript SDK: Node.js and Bun (requires local filesystem access for packaged data)
+- Python SDK: CPython 3.8+
+- Go SDK: Go 1.21+
+
+<!-- ## Benchmarking
+
+Performance benchmarks are meaningful only with your deployment profile (CPU, runtime, cold/warm process).
+
+- JavaScript perf test: `libs/javascript/test/performance.test.ts`
+- Python perf test: `libs/python/tests/test_performance.py`
+- Go microbench file placeholder: `benchmarks/go/benchmark_test.go`
+
+Use these as a starting point and publish numbers with machine/runtime details for fair comparison. -->
+
+## When Not To Use
+
+- You need rooftop-level or address-level precision
+- You need global coverage beyond India
+- You need live POI/business metadata enrichment
+
 ## Contributing
 
 Issues and PRs are welcome.  
@@ -129,4 +177,4 @@ Active. JavaScript, Python, and Go SDKs are implemented and tested.
 
 ## License
 
-MIT
+MIT — see [LICENSE](./LICENSE)

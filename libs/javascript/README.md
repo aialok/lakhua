@@ -1,6 +1,10 @@
 # @aialok/lakhua
 
-Sub-millisecond reverse geocoding for India. Runs entirely in-memory — zero API calls, zero network, zero latency overhead.
+Sub-millisecond reverse geocoding for India, fully offline.
+
+No API calls. No network latency. No rate limits.
+
+Built for backend services, cron jobs, and analytics workloads that need deterministic geocode lookups.
 
 [![npm](https://img.shields.io/npm/v/@aialok/lakhua)](https://www.npmjs.com/package/@aialok/lakhua)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](../../LICENSE)
@@ -13,6 +17,16 @@ Sub-millisecond reverse geocoding for India. Runs entirely in-memory — zero AP
 - ⚡ data loaded once per process — all subsequent lookups are in-memory map reads
 - 🐛 optional debug mode traces load time and per-lookup timing
 - 🔷 TypeScript-first — full type definitions included
+
+## Why Not Hosted APIs?
+
+| Feature | `@aialok/lakhua` | Hosted API |
+|---|---|---|
+| Works offline | yes | no |
+| API key required | no | usually yes |
+| Network dependency | no | yes |
+| Per-request cost | no | usually yes |
+| Latency variability | low, in-process | network-dependent |
 
 ## Installation
 
@@ -122,11 +136,47 @@ const result = geocode(28.6139, 77.2090, { fallback: false });
 // only checks resolution 5, no parent lookup
 ```
 
+## How It Works
+
+1. Convert `lat, lon` to H3 at resolution 5 (or configured resolution).
+2. Lookup the H3 key in in-memory store.
+3. If not found and fallback is enabled, check parent resolution 4.
+4. Return a result object, or `null` if no match exists.
+
+```text
+lat, lon -> h3(res5) -> in-memory map -> optional parent(res4) -> result/null
+```
+
+## Data Coverage
+
+- India-focused dataset
+- H3 resolutions: 4 and 5
+- Fields: `city`, `state`
+- Optional fields: `district`, `pincode` (when available)
+
+## Runtime Compatibility
+
+- Node.js
+- Bun
+
+`@aialok/lakhua` reads packaged JSON files from local filesystem at runtime.
+
 ## Performance
 
 - Data is loaded into memory once on first call.
 - Each lookup is a single map read — typically < 1ms.
 - With fallback enabled, up to 2 map reads (resolution 5, then 4).
+
+## Benchmarking
+
+Use `test/performance.test.ts` to benchmark in your own environment.
+When publishing numbers, include machine type, runtime version, and warm/cold process context.
+
+## When Not To Use
+
+- You need rooftop-level precision
+- You need global coverage
+- You need live POI or continuously updated location feeds
 
 ## Development
 
