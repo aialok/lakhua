@@ -16,4 +16,3 @@ export interface GeocodeOptions {
   resolution?: number;
   fallback?: boolean;
 }
-

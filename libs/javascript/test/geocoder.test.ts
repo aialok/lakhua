@@ -85,4 +85,3 @@ test("geocode() converts coordinates and resolves", () => {
   expect(result?.city).toBe("Bengaluru");
   expect(result?.matched_resolution).toBe(6);
 });
-

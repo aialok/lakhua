@@ -17,4 +17,3 @@ export type {
   LocationDetails,
   ReverseGeoStore,
 } from "./types.js";
-

@@ -48,4 +48,3 @@ export class ReverseGeoDataLoader {
 }
 
 export const defaultDataLoader = ReverseGeoDataLoader.getInstance();
-

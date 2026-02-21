@@ -11,4 +11,3 @@ declare module "node:path" {
 declare module "node:url" {
   export const fileURLToPath: (url: string | URL) => string;
 }
-

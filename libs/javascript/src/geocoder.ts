@@ -18,7 +18,7 @@ function clampResolution(resolution: number): number {
 
 export class ReverseGeocoder {
   private static instance: ReverseGeocoder | null = null;
-  private constructor(private readonly dataLoader: ReverseGeoDataLoader = defaultDataLoader) { }
+  private constructor(private readonly dataLoader: ReverseGeoDataLoader = defaultDataLoader) {}
 
   static getInstance(): ReverseGeocoder {
     if (!ReverseGeocoder.instance) {
@@ -64,4 +64,3 @@ export class ReverseGeocoder {
 }
 
 export const defaultGeocoder = ReverseGeocoder.getInstance();
-

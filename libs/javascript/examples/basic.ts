@@ -8,4 +8,3 @@ if (!location) {
 } else {
   console.log(location);
 }
-

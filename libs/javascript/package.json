@@ -12,11 +12,7 @@
       "import": "./dist/index.js"
     }
   },
-  "files": [
-    "dist",
-    "data",
-    "README.md"
-  ],
+  "files": ["dist", "data", "README.md"],
   "scripts": {
     "build": "bunx tsc -p tsconfig.json",
     "test": "bun test",
@@ -44,8 +40,6 @@
     "typescript": "^5.7.3"
   },
   "lint-staged": {
-    "*.{ts,js,mjs,cjs,json,md}": [
-      "bunx @biomejs/biome check --write"
-    ]
+    "*.{ts,js,mjs,cjs,json,md}": ["bunx @biomejs/biome check --write"]
   }
 }

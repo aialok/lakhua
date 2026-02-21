@@ -27,4 +27,3 @@ test("handles repeated lookups efficiently", () => {
 
   expect(elapsedMs).toBeGreaterThanOrEqual(0);
 });
-

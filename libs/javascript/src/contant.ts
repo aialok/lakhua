@@ -25,4 +25,3 @@ export function readReverseGeoStore(resolution: number): ReverseGeoStore {
   const raw = readFileSync(filePath, "utf-8");
   return JSON.parse(raw) as ReverseGeoStore;
 }
-

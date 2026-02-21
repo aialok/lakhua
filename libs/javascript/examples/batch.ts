@@ -9,4 +9,3 @@ const points: Array<[number, number]> = [
 const geocoder = ReverseGeocoder.getInstance();
 const results = points.map(([lat, lon]) => geocoder.geocode(lat, lon));
 console.log(results);
-
