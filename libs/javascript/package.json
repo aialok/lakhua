@@ -12,7 +12,7 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "data", "README.md"],
+  "files": ["dist", "data"],
   "scripts": {
     "clean": "rm -rf dist",
     "build": "bun run clean && bunx tsc -p tsconfig.json",
@@ -21,14 +21,16 @@
     "lint": "bunx @biomejs/biome check .",
     "lint:fix": "bunx @biomejs/biome check . --write",
     "format": "bunx @biomejs/biome format .",
+    "format:check": "bunx @biomejs/biome format . --check",
     "format:fix": "bunx @biomejs/biome format . --write",
     "lint-format": "bun run lint:fix && bun run format:fix",
-    "check": "bun run lint && bun run typecheck && bun test",
+    "check": "bun run lint && bun run format:check && bun run typecheck && bun test",
     "lint-staged": "lint-staged",
     "precommit": "bun run lint-staged && bun run typecheck",
     "example:basic": "bun run examples/basic.ts",
     "example:batch": "bun run examples/batch.ts",
-    "prepublishOnly": "bun run build"
+    "pack:dry-run": "npm pack --dry-run --json",
+    "prepack": "bun run build"
   },
   "dependencies": {
     "h3-js": "^4.3.0"

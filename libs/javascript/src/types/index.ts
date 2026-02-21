@@ -3,4 +3,4 @@ export type {
   GeocodeResult,
   LocationDetails,
   ReverseGeoStore,
-} from "./types/geocode.js";
+} from "./geocode.js";

@@ -1,21 +1,18 @@
-import { defaultGeocoder } from "./core/geocoder.js";
+import { defaultGeocoder } from "./core/index.js";
 
-export { ReverseGeocoder, defaultGeocoder } from "./core/geocoder.js";
-export { ReverseGeoDataLoader, defaultDataLoader } from "./core/data-loader.js";
 export {
-  DATA_DIR_NAME,
-  DATA_FILE_PREFIX,
-  DEFAULT_RESOLUTION,
-  MAX_RESOLUTION,
-  MIN_RESOLUTION,
-  SUPPORTED_RESOLUTIONS,
-} from "./config/constants.js";
+  ReverseGeocoder,
+  ReverseGeoDataLoader,
+  defaultDataLoader,
+  defaultGeocoder,
+} from "./core/index.js";
+export * from "./config/index.js";
 export type {
   GeocodeOptions,
   GeocodeResult,
   LocationDetails,
   ReverseGeoStore,
-} from "./types/geocode.js";
+} from "./types/index.js";
 
 /**
  * Reverse geocodes latitude/longitude into India location metadata.
@@ -37,8 +34,8 @@ export type {
 export function geocode(
   lat: number,
   lon: number,
-  options?: import("./types/geocode.js").GeocodeOptions,
-): import("./types/geocode.js").GeocodeResult | null {
+  options?: import("./types/index.js").GeocodeOptions,
+): import("./types/index.js").GeocodeResult | null {
   return defaultGeocoder.geocode(lat, lon, options);
 }
 
@@ -60,7 +57,7 @@ export function geocode(
  */
 export function geocodeH3(
   h3Index: string,
-  options?: import("./types/geocode.js").GeocodeOptions,
-): import("./types/geocode.js").GeocodeResult | null {
+  options?: import("./types/index.js").GeocodeOptions,
+): import("./types/index.js").GeocodeResult | null {
   return defaultGeocoder.geocodeH3(h3Index, options);
 }
