@@ -1,4 +1,4 @@
-# lakhua (JavaScript/TypeScript)
+# lakhua
 
 Offline reverse geocoding for India, optimized for fast in-memory lookups using H3 indexes.
 
