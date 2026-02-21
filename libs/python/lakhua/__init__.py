@@ -4,6 +4,8 @@ lakhua: Fast, offline reverse geocoding for India.
 This library provides in-memory reverse geocoding using H3 spatial indexing.
 """
 
+from typing import Optional
+
 from lakhua.core import (
     DATA_DIR_NAME,
     DATA_FILE_PREFIX,
@@ -43,8 +45,8 @@ __all__ = [
 def geocode(
     lat: float,
     lon: float,
-    options: GeocodeOptions | None = None,
-) -> GeocodeResult | None:
+    options: Optional[GeocodeOptions] = None,
+) -> Optional[GeocodeResult]:
     """
     Reverse geocodes latitude/longitude into India location metadata.
 
@@ -69,8 +71,8 @@ def geocode(
 
 def geocode_h3(
     h3_index: str,
-    options: GeocodeOptions | None = None,
-) -> GeocodeResult | None:
+    options: Optional[GeocodeOptions] = None,
+) -> Optional[GeocodeResult]:
     """
     Reverse geocodes an H3 cell index directly.
 

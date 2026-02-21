@@ -8,7 +8,7 @@ geocoding logic or need to understand the library's resolution constraints.
 
 import json
 from pathlib import Path
-from typing import Dict
+from typing import Dict, cast
 
 # Resolution configuration
 MIN_RESOLUTION: int = 4
@@ -87,5 +87,5 @@ def read_reverse_geo_store(resolution: int) -> Dict[str, Dict[str, str]]:
         return {}
 
     with open(file_path, encoding="utf-8") as f:
-        return json.load(f)
+        return cast(Dict[str, Dict[str, str]], json.load(f))
 
