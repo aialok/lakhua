@@ -1,0 +1,51 @@
+{
+  "name": "lakhua",
+  "version": "0.1.0",
+  "description": "Fast, offline reverse geocoding for India",
+  "type": "module",
+  "packageManager": "bun@1.2.20",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "data",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "bunx tsc -p tsconfig.json",
+    "test": "bun test",
+    "typecheck": "bunx tsc -p tsconfig.json --noEmit",
+    "lint": "bunx @biomejs/biome check .",
+    "lint:fix": "bunx @biomejs/biome check . --write",
+    "format": "bunx @biomejs/biome format .",
+    "format:fix": "bunx @biomejs/biome format . --write",
+    "check": "bun run lint && bun run typecheck && bun test",
+    "lint-staged": "lint-staged",
+    "precommit": "bun run lint-staged && bun run typecheck",
+    "example:basic": "bun run examples/basic.ts",
+    "example:batch": "bun run examples/batch.ts",
+    "prepublishOnly": "bun run build"
+  },
+  "dependencies": {
+    "h3-js": "^4.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.2.20",
+    "@types/node": "^22.10.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "typescript": "^5.7.3"
+  },
+  "lint-staged": {
+    "*.{ts,js,mjs,cjs,json,md}": [
+      "bunx @biomejs/biome check --write"
+    ]
+  }
+}
