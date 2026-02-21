@@ -83,3 +83,15 @@ test("geocode() converts coordinates and resolves", () => {
   expect(result?.city).toBe("Bengaluru");
   expect(result?.matched_resolution).toBe(5);
 });
+
+test("geocode() returns null for out-of-range coordinates", () => {
+  const tooHighLat = geocoder.geocode(91, 77.5946);
+  const tooLowLat = geocoder.geocode(-91, 77.5946);
+  const tooHighLon = geocoder.geocode(12.9716, 181);
+  const tooLowLon = geocoder.geocode(12.9716, -181);
+
+  expect(tooHighLat).toBeNull();
+  expect(tooLowLat).toBeNull();
+  expect(tooHighLon).toBeNull();
+  expect(tooLowLon).toBeNull();
+});

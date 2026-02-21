@@ -111,6 +111,9 @@ export class ReverseGeocoder {
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
       return null;
     }
+    if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+      return null;
+    }
 
     const resolution = clampResolution(options.resolution ?? DEFAULT_RESOLUTION);
     const h3Index = latLngToCell(lat, lon, resolution);
