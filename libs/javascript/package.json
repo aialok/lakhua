@@ -1,5 +1,5 @@
 {
-  "name": "lakhua",
+  "name": "@aialok/lakhua",
   "version": "0.1.0",
   "description": "Fast, offline reverse geocoding for India",
   "type": "module",

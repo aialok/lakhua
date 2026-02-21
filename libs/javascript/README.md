@@ -13,13 +13,15 @@ Offline reverse geocoding for India, optimized for fast in-memory lookups using 
 ## Installation
 
 ```bash
-bun add lakhua
+bun add @aialok/lakhua
+# or
+npm install @aialok/lakhua
 ```
 
 ## Quick Start
 
 ```ts
-import { geocode } from "lakhua";
+import { geocode } from "@aialok/lakhua";
 
 const location = geocode(28.6139, 77.209);
 
@@ -73,7 +75,7 @@ Returns `null` for invalid inputs or when no match is found.
 ### Coordinate lookup
 
 ```ts
-import { geocode } from "lakhua";
+import { geocode } from "@aialok/lakhua";
 
 const result = geocode(12.9716, 77.5946);
 console.log(result);
@@ -82,7 +84,7 @@ console.log(result);
 ### Direct H3 lookup
 
 ```ts
-import { geocodeH3 } from "lakhua";
+import { geocodeH3 } from "@aialok/lakhua";
 
 const result = geocodeH3("866189b1fffffff");
 console.log(result);
@@ -91,7 +93,7 @@ console.log(result);
 ### Debug mode
 
 ```ts
-import { geocode } from "lakhua";
+import { geocode } from "@aialok/lakhua";
 
 const result = geocode(19.076, 72.8777, { debug: true });
 console.log(result);
