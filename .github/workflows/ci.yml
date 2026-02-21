@@ -6,11 +6,13 @@ on:
     paths:
       - "libs/javascript/**"
       - "libs/python/**"
+      - "libs/go/**"
       - ".github/workflows/**"
   pull_request:
     paths:
       - "libs/javascript/**"
       - "libs/python/**"
+      - "libs/go/**"
       - ".github/workflows/**"
   workflow_dispatch:
 
@@ -23,6 +25,7 @@ jobs:
     outputs:
       javascript: ${{ steps.filter.outputs.javascript }}
       python: ${{ steps.filter.outputs.python }}
+      go: ${{ steps.filter.outputs.go }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,6 +39,8 @@ jobs:
               - 'libs/javascript/**'
             python:
               - 'libs/python/**'
+            go:
+              - 'libs/go/**'
 
   javascript:
     name: JavaScript checks
@@ -90,4 +95,24 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+  go:
+    name: Go checks
+    needs: changes
+    if: needs.changes.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: libs/go
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Run tests
+        run: go test ./...
 
