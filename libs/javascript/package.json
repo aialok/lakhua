@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "description": "Fast, offline reverse geocoding for India",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aialok/lakhua.git"
+  },
   "packageManager": "bun@1.2.20",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
