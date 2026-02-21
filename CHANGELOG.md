@@ -8,8 +8,17 @@ and versioning follows [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- _No changes yet._
+
+### Changed
+- _No changes yet._
+
+## [1.0.0] - 2026-02-21
+
+### Added
 - Expanded docs in `docs/` (`getting-started`, `architecture`, `contributing`, `faq`).
-- Added sections in root and JS READMEs for positioning, comparison, coverage, compatibility, and usage boundaries.
+- Improved root and SDK READMEs with clearer positioning, runtime compatibility notes, comparison guidance, and usage boundaries.
+- Added explicit data-source and indexing attribution for Uber H3 and OpenStreetMap contributors in project docs.
 
 ### Changed
 - JavaScript geocoder now returns `null` for out-of-range coordinates instead of allowing invalid H3 conversion.
