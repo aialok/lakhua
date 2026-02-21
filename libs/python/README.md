@@ -123,6 +123,12 @@ result = geocode(28.6139, 77.2090, GeocodeOptions(fallback=False))
 # only checks resolution 5, no parent lookup
 ```
 
+## Data Source and Indexing
+
+- Indexing system: [Uber H3](https://h3geo.org/)
+- Geographic source data: OpenStreetMap data by [OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
+- Distribution model: precomputed JSON stores bundled with the package
+
 ## Performance
 
 - Data is loaded into memory once on first call.

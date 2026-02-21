@@ -147,6 +147,12 @@ const result = geocode(28.6139, 77.2090, { fallback: false });
 lat, lon -> h3(res5) -> in-memory map -> optional parent(res4) -> result/null
 ```
 
+## Data Source and Indexing
+
+- Indexing system: [Uber H3](https://h3geo.org/)
+- Geographic source data: OpenStreetMap data by [OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
+- Distribution model: precomputed JSON stores bundled with the package
+
 ## Data Coverage
 
 - India-focused dataset

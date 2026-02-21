@@ -63,6 +63,13 @@ fallback to parent (res 4, optional)
 result / null
 ```
 
+## Data Source and Indexing
+
+- Indexing system: [Uber H3](https://h3geo.org/) (hexagonal hierarchical spatial index)
+- Geographic source data: OpenStreetMap data by [OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
+- Packaging model: precomputed JSON lookup stores shipped with each SDK
+- Attribution: includes OSM-derived data transformed into H3-indexed reverse-geocoding stores
+
 ## SDKs
 
 | Language | Package | Docs |
