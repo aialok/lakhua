@@ -1,21 +1,25 @@
-# lakhua
+# @aialok/lakhua
 
-Offline reverse geocoding for India, optimized for fast in-memory lookups using H3 indexes.
+Sub-millisecond reverse geocoding for India. Runs entirely in-memory — zero API calls, zero network, zero latency overhead.
+
+[![npm](https://img.shields.io/npm/v/@aialok/lakhua)](https://www.npmjs.com/package/@aialok/lakhua)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](../../LICENSE)
 
 ## Features
 
-- offline-first (no API keys, no network dependency)
-- in-memory lookup with singleton loader
-- parent-resolution fallback (`5 -> 4`)
-- Bun-native tooling (test, lint, format)
-- TypeScript-first API with full type definitions
+- 📍 converts `lat, lon` to `city`, `state`, optional `district` and `pincode`
+- 🔢 supports direct H3 index lookup via `geocodeH3()`
+- ↩️ parent-cell fallback (`resolution 5 → 4`) when exact cell has no data
+- ⚡ data loaded once per process — all subsequent lookups are in-memory map reads
+- 🐛 optional debug mode traces load time and per-lookup timing
+- 🔷 TypeScript-first — full type definitions included
 
 ## Installation
 
 ```bash
-bun add @aialok/lakhua
-# or
 npm install @aialok/lakhua
+# or
+bun add @aialok/lakhua
 ```
 
 ## Quick Start
@@ -23,37 +27,32 @@ npm install @aialok/lakhua
 ```ts
 import { geocode } from "@aialok/lakhua";
 
-const location = geocode(28.6139, 77.209);
-
-if (location) {
-  console.log(location.city, location.state);
+const result = geocode(28.6139, 77.2090);
+if (result) {
+  console.log(result.city, result.state);
 }
 ```
 
-## API Reference
+## API
 
-### Recommended top-level APIs
+### Top-level functions (recommended)
 
-- `geocode(lat, lon, options?) => GeocodeResult | null`
-- `geocodeH3(h3Index, options?) => GeocodeResult | null`
+```ts
+geocode(lat: number, lon: number, options?: GeocodeOptions): GeocodeResult | null
+geocodeH3(h3Index: string, options?: GeocodeOptions): GeocodeResult | null
+```
 
-These helpers use the default singleton geocoder internally.
-
-### Advanced class APIs
-
-- `ReverseGeocoder.getInstance()`
-- `ReverseGeoDataLoader.getInstance()`
-
-Use these only when you need explicit control in advanced runtime or testing scenarios.
+These use the internal singleton geocoder — no class instantiation needed.
 
 ### `GeocodeOptions`
 
-- `resolution?: number`  
-  H3 resolution used during `geocode(lat, lon)`. Default is `5`.
-- `fallback?: boolean`  
-  Default `true`. If enabled, lookup tries parent resolutions until `4`.
-- `debug?: boolean`  
-  Enables internal timing logs for loading and in-memory key lookups.
+```ts
+interface GeocodeOptions {
+  resolution?: number;  // H3 resolution for geocode(lat, lon). Default: 5
+  fallback?: boolean;   // Walk up to parent resolution on miss. Default: true
+  debug?: boolean;      // Print load and lookup timings. Default: false
+}
+```
 
 ### `GeocodeResult`
 
@@ -63,12 +62,23 @@ interface GeocodeResult {
   state: string;
   district?: string;
   pincode?: string;
-  matched_h3: string;
-  matched_resolution: number;
+  matched_h3: string;         // H3 cell that matched (may be parent)
+  matched_resolution: number; // Resolution of the matched cell
 }
 ```
 
-Returns `null` for invalid inputs or when no match is found.
+Returns `null` for invalid input or when no data exists for the given location.
+
+### Advanced class APIs
+
+```ts
+import { ReverseGeocoder, ReverseGeoDataLoader } from "@aialok/lakhua";
+
+ReverseGeocoder.getInstance()
+ReverseGeoDataLoader.getInstance()
+```
+
+Use these only when you need explicit control — e.g. testing or custom singleton lifecycle.
 
 ## Examples
 
@@ -77,8 +87,10 @@ Returns `null` for invalid inputs or when no match is found.
 ```ts
 import { geocode } from "@aialok/lakhua";
 
-const result = geocode(12.9716, 77.5946);
-console.log(result);
+const result = geocode(12.9716, 77.5946); // Bengaluru
+if (result) {
+  console.log(result.city, result.state, result.pincode);
+}
 ```
 
 ### Direct H3 lookup
@@ -86,8 +98,10 @@ console.log(result);
 ```ts
 import { geocodeH3 } from "@aialok/lakhua";
 
-const result = geocodeH3("866189b1fffffff");
-console.log(result);
+const result = geocodeH3("8560145bfffffff");
+if (result) {
+  console.log(result.city);
+}
 ```
 
 ### Debug mode
@@ -96,41 +110,34 @@ console.log(result);
 import { geocode } from "@aialok/lakhua";
 
 const result = geocode(19.076, 72.8777, { debug: true });
-console.log(result);
+// prints load + lookup timings to console
 ```
 
-## Performance Notes
+### Disable fallback
 
-- Data files are loaded once per process into memory.
-- Lookups are map-based in-memory operations.
-- Fallback adds up to two additional parent checks (`5`, `4`) when enabled.
+```ts
+import { geocode } from "@aialok/lakhua";
 
-## Project Layout
-
-```text
-src/
-  core/
-    geocoder.ts
-    data-loader.ts
-  config/
-    constants.ts
-  types/
-    geocode.ts
-  index.ts
+const result = geocode(28.6139, 77.2090, { fallback: false });
+// only checks resolution 5, no parent lookup
 ```
 
-Compatibility re-exports are still available:
+## Performance
 
-- `src/geocoder.ts`
-- `src/dataLoader.ts`
-- `src/types.ts`
-- `src/contant.ts`
+- Data is loaded into memory once on first call.
+- Each lookup is a single map read — typically < 1ms.
+- With fallback enabled, up to 2 map reads (resolution 5, then 4).
 
 ## Development
 
 ```bash
+bun install
 bun run lint
 bun run format
 bun run typecheck
 bun test
 ```
+
+## License
+
+MIT
