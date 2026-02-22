@@ -1,10 +1,10 @@
 # lakhua
 
-Sub-millisecond reverse geocoding for India, fully offline.
+Fast, offline reverse geocoding for India using H3 and OpenStreetMap. Zero API costs, sub-millisecond latency
 
-No API calls. No network latency. No rate limits.
+No API calls. No outbound network requests. No per-request billing.
 
-Best for backend services, batch pipelines, and privacy-sensitive workloads that need deterministic lookup performance.
+Best for backend services that need high-level location lookup (city/state/district/pincode).
 
 `lakhua` is named after my hometown — a small town barely on most maps.
 
@@ -33,16 +33,6 @@ Best for backend services, batch pipelines, and privacy-sensitive workloads that
 - address-level precision (city/district level)
 - online API or hosted endpoint
 - guaranteed full spatial coverage for every coordinate in India
-
-## Why Not Hosted Reverse-Geocoding APIs?
-
-| Feature | lakhua | Hosted API |
-|---|---|---|
-| Works offline | yes | no |
-| API key required | no | usually yes |
-| Network dependency | no | yes |
-| Per-request cost | no | usually yes |
-| Latency variability | low, in-process | network-dependent |
 
 ## How It Works
 
@@ -184,6 +174,100 @@ See each SDK's `README.md` for local development setup.
 ## Project Status
 
 Active. JavaScript, Python, and Go SDKs are implemented and tested.
+
+## lakhua vs Hosted Reverse-Geocoding APIs
+
+Most reverse geocoding today relies on hosted services like Google Maps Platform, Mapbox, HERE, or OpenCage. These platforms target global coverage, rich metadata, and consumer-facing use cases.
+
+lakhua is built for a narrower use case: embedded, offline reverse geocoding inside backend systems. It returns high-level location data (city, state, optional district, and pincode), not address-level detail.
+
+### Architectural Philosophy
+
+Hosted APIs are network services. lakhua is embedded infrastructure.
+
+Hosted APIs typically:
+
+- require outbound HTTP
+- require API keys
+- enforce rate limits
+- bill per request
+- introduce network latency
+
+lakhua:
+
+- runs in-process
+- loads once into memory
+- performs in-memory lookups
+- has no per-request billing
+- delivers consistent response times once loaded
+
+This is not a feature comparison. It is an architectural difference.
+
+### Cost at Scale
+
+If you process:
+
+- millions of GPS events
+- large telemetry datasets
+- batch analytics pipelines
+- high-frequency backend requests
+
+Hosted APIs scale cost linearly with volume. lakhua scales with CPU and memory you already control.
+
+No per-request billing or request accounting.
+
+### Performance Characteristics
+
+Hosted APIs:
+
+- latency varies by geography
+- subject to network congestion
+- subject to provider throttling
+
+lakhua:
+
+- in-memory H3 lookup
+- no network variability
+- no external throttling
+- consistent response time once loaded
+
+Once loaded, performance is consistent.
+
+### Privacy and Compliance
+
+If you operate in environments where:
+
+- user coordinates cannot leave your infrastructure
+- data residency matters
+- compliance restrictions apply
+- air-gapped systems are required
+
+Hosted APIs may not be viable. lakhua runs fully offline. Coordinates stay inside your system.
+
+### Scope and Trade-Offs
+
+lakhua is not trying to replace global mapping platforms. It does not provide:
+
+- rooftop or address-level precision
+- global coverage beyond India
+- live business or POI metadata
+- SLA-backed hosted infrastructure
+
+Hosted APIs are better for those needs.
+
+lakhua is optimized for:
+
+- India-focused systems
+- backend enrichment
+- batch geospatial pipelines
+- cost-sensitive workloads
+- deterministic infrastructure
+
+### Positioning
+
+Hosted APIs are full mapping platforms. lakhua is embedded geospatial infrastructure for basic reverse geocoding.
+
+If your product needs global coverage or address-level precision, a hosted platform is likely a better fit. If you need fast, offline, predictable reverse geocoding inside your backend, lakhua fits well.
 
 ## License
 
