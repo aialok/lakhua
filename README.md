@@ -173,6 +173,10 @@ See each SDK's `README.md` for local development setup.
 
 Active. JavaScript, Python, and Go SDKs are implemented and tested.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=aialok/lakhua&type=date&legend=top-left)](https://www.star-history.com/#aialok/lakhua&type=date&legend=top-left)
+
 ## lakhua vs Hosted Reverse-Geocoding APIs
 
 Most reverse geocoding today relies on hosted services like Google Maps Platform, Mapbox, HERE, or OpenCage. These platforms target global coverage, rich metadata, and consumer-facing use cases.
