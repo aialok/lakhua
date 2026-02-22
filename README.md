@@ -2,8 +2,6 @@
 
 Fast, offline reverse geocoding for India using H3 and OpenStreetMap. Zero API costs, sub-millisecond latency
 
-No API calls. No outbound network requests. No per-request billing.
-
 Best for backend services that need high-level location lookup (city/state/district/pincode).
 
 `lakhua` is named after my hometown — a small town barely on most maps.
