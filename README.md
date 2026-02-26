@@ -100,7 +100,15 @@ go get github.com/aialok/lakhua/libs/go
 ```ts
 import { geocode } from "@aialok/lakhua";
 
-const result = geocode(28.6139, 77.2090);
+const result = geocode(12.9716, 77.5946);
+// result => {
+//   city: "Bengaluru",
+//   state: "Karnataka",
+//   district: "Bangalore North",
+//   pincode: "560003",
+//   matchedH3: "8560145bfffffff",
+//   matchedResolution: 5,
+// }
 if (result) {
   console.log(result.city, result.state);
 }
@@ -111,7 +119,14 @@ if (result) {
 ```python
 from lakhua import geocode
 
-result = geocode(28.6139, 77.2090)
+result = geocode(12.9716, 77.5946)
+# result ->
+#   city: "Bengaluru"
+#   state: "Karnataka"
+#   district: "Bangalore North"
+#   pincode: "560003"
+#   matched_h3: "8560145bfffffff"
+#   matched_resolution: 5
 if result:
     print(result.city, result.state)
 ```
@@ -119,7 +134,17 @@ if result:
 ### Go
 
 ```go
-result := lakhua.Geocode(28.6139, 77.2090, nil)
+result := lakhua.Geocode(12.9716, 77.5946, nil)
+// result -> &lakhua.GeocodeResult{
+//   LocationDetails: lakhua.LocationDetails{
+//     City: "Bengaluru",
+//     State: "Karnataka",
+//     District: strPtr("Bangalore North"),
+//     Pincode: strPtr("560003"),
+//   },
+//   MatchedH3: "8560145bfffffff",
+//   MatchedResolution: 5,
+// }
 if result != nil {
     fmt.Println(result.City, result.State)
 }
