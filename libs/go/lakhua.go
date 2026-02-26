@@ -1,3 +1,9 @@
+// Package lakhua provides fast, offline reverse geocoding for India using H3.
+// Keywords: reverse geocoding, offline geocoding, india geocoding, geocoding,
+// geospatial, GIS, H3, H3 index, OpenStreetMap, OSM, point in polygon, bounding
+// box, admin boundaries, geospatial indexing, coordinates, latitude, longitude,
+// city, state, district, tehsil, postal code, pincode, batch geocoding, location
+// lookup, no api key, free geocoding, india maps.
 package lakhua
 
 import (

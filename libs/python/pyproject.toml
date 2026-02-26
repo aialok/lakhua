@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lakhua"
-version = "1.0.0"
+version = "1.0.1"
 description = "Fast, offline reverse geocoding for India"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,7 +12,37 @@ license = {text = "MIT"}
 authors = [
     {name = "aialok", email = "your.email@example.com"}
 ]
-keywords = ["geocoding", "reverse-geocoding", "h3", "india", "offline"]
+keywords = [
+    "reverse geocoding",
+    "offline geocoding",
+    "india geocoding",
+    "geocoding",
+    "geospatial",
+    "gis",
+    "h3",
+    "h3-js",
+    "h3 index",
+    "openstreetmap",
+    "osm",
+    "point in polygon",
+    "bounding box",
+    "admin boundaries",
+    "geospatial indexing",
+    "coordinates",
+    "latitude",
+    "longitude",
+    "city",
+    "state",
+    "district",
+    "tehsil",
+    "postal code",
+    "pincode",
+    "batch geocoding",
+    "location lookup",
+    "no api key",
+    "free geocoding",
+    "india maps",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -70,4 +100,3 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 addopts = "-v --cov=lakhua --cov-report=term-missing"
-
