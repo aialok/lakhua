@@ -1,6 +1,6 @@
 # lakhua
 
-Fast, offline reverse geocoding for India using H3 and OpenStreetMap. Zero API costs, sub-millisecond latency
+Lightweight, blazing fast offline reverse geocoding for India using H3 and OpenStreetMap. Zero API costs. Sub millisecond latency.
 
 Best for backend services that need high-level location lookup (city/state/district/pincode).
 
