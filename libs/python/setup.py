@@ -8,7 +8,7 @@ README = Path(__file__).with_name("README.md").read_text(encoding="utf-8")
 
 setup(
     name="lakhua",
-    version="1.0.0",
+    version="1.0.1",
     description="Fast, offline reverse geocoding for India",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -50,7 +50,12 @@ setup(
         "Topic :: Scientific/Engineering :: GIS",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="geocoding reverse-geocoding h3 india offline",
+    keywords=(
+        "reverse geocoding offline geocoding india geocoding geocoding geospatial gis "
+        "h3 h3-js h3 index openstreetmap osm point in polygon bounding box admin boundaries "
+        "geospatial indexing coordinates latitude longitude city state district tehsil "
+        "postal code pincode batch geocoding location lookup no api key free geocoding "
+        "india maps"
+    ),
     license="MIT",
 )
-
